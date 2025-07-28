@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Research Analyzer - Document Processing & Plagiarism Detection</title>
+    <meta name="description" content="Advanced Word document analysis with plagiarism detection and automatic paraphrasing">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-file-alt"></i>
+                    <h1>Word Research Analyzer</h1>
+                </div>
+                <nav class="nav">
+                    <a href="#home" class="nav-link active">Home</a>
+                    <a href="#features" class="nav-link">Features</a>
+                    <a href="#help" class="nav-link">Help</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero" id="home">
+                <div class="hero-content">
+                    <h2>Advanced Document Analysis & Plagiarism Detection</h2>
+                    <p>Upload your Word documents for comprehensive analysis, plagiarism detection, and automatic paraphrasing with our advanced AI-powered system.</p>
+                </div>
+            </section>
+
+            <!-- Upload Section -->
+            <section class="upload-section" id="upload-section">
+                <div class="upload-container">
+                    <h3>Upload Your Document</h3>
+                    
+                    <!-- File Upload Area -->
+                    <div class="upload-area" id="upload-area">
+                        <div class="upload-content">
+                            <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                            <h4>Drag & Drop Your Document Here</h4>
+                            <p>or <button type="button" class="browse-btn" id="browse-btn">Browse Files</button></p>
+                            <small>Supported formats: .docx, .doc (Max size: 100MB)</small>
+                        </div>
+                        <input type="file" id="file-input" accept=".docx,.doc" hidden>
+                    </div>
+
+                    <!-- File Preview -->
+                    <div class="file-preview" id="file-preview" style="display: none;">
+                        <div class="file-info">
+                            <i class="fas fa-file-word"></i>
+                            <div class="file-details">
+                                <span class="file-name" id="file-name"></span>
+                                <span class="file-size" id="file-size"></span>
+                            </div>
+                            <button class="remove-file" id="remove-file">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="upload-progress" id="upload-progress" style="display: none;">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-fill"></div>
+                            </div>
+                            <span class="progress-text" id="progress-text">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analysis Options -->
+            <section class="options-section" id="options-section" style="display: none;">
+                <div class="options-container">
+                    <h3>Analysis Options</h3>
+                    
+                    <div class="options-grid">
+                        <!-- Core Analysis Options -->
+                        <div class="option-group">
+                            <h4>Core Analysis</h4>
+                            <div class="option-item">
+                                <input type="checkbox" id="plagiarism-check" checked>
+                                <label for="plagiarism-check">
+                                    <i class="fas fa-search"></i>
+                                    Plagiarism Detection
+                                    <span class="option-desc">Scan for potential plagiarism issues</span>
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" id="auto-paraphrase" checked>
+                                <label for="auto-paraphrase">
+                                    <i class="fas fa-edit"></i>
+                                    Automatic Paraphrasing
+                                    <span class="option-desc">Rephrase content to improve originality</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Additional Options -->
+                        <div class="option-group">
+                            <h4>Additional Analysis</h4>
+                            <div class="option-item">
+                                <input type="checkbox" id="structure-analysis">
+                                <label for="structure-analysis">
+                                    <i class="fas fa-sitemap"></i>
+                                    Structure Analysis
+                                    <span class="option-desc">Analyze document organization</span>
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" id="quality-metrics">
+                                <label for="quality-metrics">
+                                    <i class="fas fa-chart-line"></i>
+                                    Quality Metrics
+                                    <span class="option-desc">Assess writing quality and readability</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Paraphrasing Intensity -->
+                    <div class="intensity-selector" id="intensity-selector">
+                        <h4>Paraphrasing Intensity</h4>
+                        <div class="intensity-options">
+                            <input type="radio" id="light" name="intensity" value="light">
+                            <label for="light" class="intensity-label">
+                                <span class="intensity-title">Light</span>
+                                <span class="intensity-desc">Minimal changes, preserve style</span>
+                            </label>
+                            
+                            <input type="radio" id="moderate" name="intensity" value="moderate" checked>
+                            <label for="moderate" class="intensity-label">
+                                <span class="intensity-title">Moderate</span>
+                                <span class="intensity-desc">Balanced improvements</span>
+                            </label>
+                            
+                            <input type="radio" id="heavy" name="intensity" value="heavy">
+                            <label for="heavy" class="intensity-label">
+                                <span class="intensity-title">Heavy</span>
+                                <span class="intensity-desc">Extensive rephrasing</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Start Analysis Button -->
+                    <div class="analysis-actions">
+                        <button class="btn btn-primary btn-large" id="start-analysis">
+                            <i class="fas fa-play"></i>
+                            Start Analysis
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Loading Screen -->
+            <section class="loading-section" id="loading-section" style="display: none;">
+                <div class="loading-container">
+                    <div class="loading-content">
+                        <div class="loading-spinner">
+                            <div class="spinner"></div>
+                        </div>
+                        <h3>Analyzing Your Document</h3>
+                        <p id="loading-message">Preparing analysis...</p>
+                        
+                        <div class="progress-steps">
+                            <div class="step" id="step-1">
+                                <i class="fas fa-upload"></i>
+                                <span>Uploading</span>
+                            </div>
+                            <div class="step" id="step-2">
+                                <i class="fas fa-search"></i>
+                                <span>Scanning</span>
+                            </div>
+                            <div class="step" id="step-3">
+                                <i class="fas fa-edit"></i>
+                                <span>Paraphrasing</span>
+                            </div>
+                            <div class="step" id="step-4">
+                                <i class="fas fa-check"></i>
+                                <span>Complete</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Dashboard -->
+            <section class="results-section" id="results-section" style="display: none;">
+                <div class="results-container">
+                    <div class="results-header">
+                        <h3>Analysis Results</h3>
+                        <div class="results-actions">
+                            <button class="btn btn-secondary" id="new-analysis">
+                                <i class="fas fa-plus"></i>
+                                New Analysis
+                            </button>
+                            <button class="btn btn-primary" id="download-results">
+                                <i class="fas fa-download"></i>
+                                Download Report
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Summary Cards -->
+                    <div class="summary-cards">
+                        <div class="summary-card">
+                            <div class="card-icon plagiarism">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="card-content">
+                                <h4>Plagiarism Risk</h4>
+                                <div class="metric">
+                                    <span class="value" id="plagiarism-score">0%</span>
+                                    <span class="status" id="plagiarism-status">Low Risk</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="summary-card">
+                            <div class="card-icon paraphrase">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div class="card-content">
+                                <h4>Sentences Modified</h4>
+                                <div class="metric">
+                                    <span class="value" id="modified-sentences">0</span>
+                                    <span class="status" id="modification-status">Improvements</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="summary-card">
+                            <div class="card-icon quality">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="card-content">
+                                <h4>Quality Score</h4>
+                                <div class="metric">
+                                    <span class="value" id="quality-score">0</span>
+                                    <span class="status" id="quality-status">Excellent</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Results Tabs -->
+                    <div class="results-tabs">
+                        <div class="tab-headers">
+                            <button class="tab-btn active" data-tab="overview">
+                                <i class="fas fa-chart-pie"></i>
+                                Overview
+                            </button>
+                            <button class="tab-btn" data-tab="plagiarism">
+                                <i class="fas fa-search"></i>
+                                Plagiarism
+                            </button>
+                            <button class="tab-btn" data-tab="paraphrasing">
+                                <i class="fas fa-edit"></i>
+                                Paraphrasing
+                            </button>
+                            <button class="tab-btn" data-tab="comparison">
+                                <i class="fas fa-columns"></i>
+                                Comparison
+                            </button>
+                        </div>
+
+                        <div class="tab-content">
+                            <!-- Overview Tab -->
+                            <div class="tab-panel active" id="overview-panel">
+                                <div class="overview-content">
+                                    <div class="document-stats">
+                                        <h4>Document Statistics</h4>
+                                        <div class="stats-grid">
+                                            <div class="stat-item">
+                                                <span class="stat-label">Words</span>
+                                                <span class="stat-value" id="word-count">0</span>
+                                            </div>
+                                            <div class="stat-item">
+                                                <span class="stat-label">Paragraphs</span>
+                                                <span class="stat-value" id="paragraph-count">0</span>
+                                            </div>
+                                            <div class="stat-item">
+                                                <span class="stat-label">Pages</span>
+                                                <span class="stat-value" id="page-count">0</span>
+                                            </div>
+                                            <div class="stat-item">
+                                                <span class="stat-label">Reading Time</span>
+                                                <span class="stat-value" id="reading-time">0 min</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Plagiarism Tab -->
+                            <div class="tab-panel" id="plagiarism-panel">
+                                <div class="plagiarism-content">
+                                    <h4>Plagiarism Analysis</h4>
+                                    <div class="plagiarism-results" id="plagiarism-results">
+                                        <!-- Dynamic content will be loaded here -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Paraphrasing Tab -->
+                            <div class="tab-panel" id="paraphrasing-panel">
+                                <div class="paraphrasing-content">
+                                    <h4>Paraphrasing Results</h4>
+                                    <div class="paraphrasing-results" id="paraphrasing-results">
+                                        <!-- Dynamic content will be loaded here -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Comparison Tab -->
+                            <div class="tab-panel" id="comparison-panel">
+                                <div class="comparison-content">
+                                    <div class="comparison-header">
+                                        <h4>Side-by-Side Comparison</h4>
+                                        <div class="comparison-controls">
+                                            <button class="btn btn-outline" id="highlight-changes">
+                                                <i class="fas fa-highlighter"></i>
+                                                Highlight Changes
+                                            </button>
+                                            <button class="btn btn-primary" id="export-document">
+                                                <i class="fas fa-file-export"></i>
+                                                Export Document
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="comparison-view">
+                                        <div class="comparison-pane">
+                                            <h5>Original</h5>
+                                            <div class="content-viewer" id="original-content">
+                                                <!-- Original content will be loaded here -->
+                                            </div>
+                                        </div>
+                                        <div class="comparison-pane">
+                                            <h5>Paraphrased</h5>
+                                            <div class="content-viewer" id="paraphrased-content">
+                                                <!-- Paraphrased content will be loaded here -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Word Research Analyzer. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                    <a href="#support">Support</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Error Modal -->
+    <div class="modal" id="error-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Error</h4>
+                <button class="modal-close" id="error-modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="error-message">An error occurred while processing your request.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="error-modal-ok">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="success-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Success</h4>
+                <button class="modal-close" id="success-modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="success-message">Operation completed successfully!</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="success-modal-ok">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="assets/js/file-handler.js"></script>
+    <script src="assets/js/api-client.js"></script>
+    <script src="assets/js/ui-controller.js"></script>
+    <script src="assets/js/result-display.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

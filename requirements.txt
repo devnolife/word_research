@@ -1,0 +1,21 @@
+# Core document processing dependencies
+python-docx
+python-magic
+pathlib2
+dataclasses
+typing-extensions
+
+# Web server dependencies (for frontend)
+Flask
+Flask-CORS
+Werkzeug
+
+# Development and testing
+pytest
+black
+flake8
+mypy
+
+# Optional: Production deployment
+gunicorn
+waitress
